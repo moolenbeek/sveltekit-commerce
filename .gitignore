@@ -3,9 +3,6 @@ node_modules
 # DB
 /src/lib/database/migrations
 
-#Todo
-todo.md
-
 # Output
 .output
 .vercel
