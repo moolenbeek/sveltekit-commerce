@@ -37,7 +37,7 @@
 					{#if !user}
 						<a href="/login" class="text-sm font-medium hover:text-primary">Login</a>
 					{:else}
-						<a href="/account" class="text-sm font-medium hover:text-primary">{user.name}</a>
+						<a href="/account" class="text-sm font-medium hover:text-primary">{user.firstName} {user.lastName}</a>
 						<form action="/logout" method="POST">
 							<Button type="submit" class="outline">Logout</Button>
 						</form>
@@ -65,7 +65,7 @@
 								{#if !user}
 									<a href="/login" class="text-sm font-medium hover:text-primary">Login</a>
 								{:else}
-									<a href="/">{user.name}</a>
+									<a href="/">{user.firstName} {user.lastName}</a>
 									<form action="/logout" method="POST">
 										<Button type="submit" class="outline w-full">Logout</Button>
 									</form>

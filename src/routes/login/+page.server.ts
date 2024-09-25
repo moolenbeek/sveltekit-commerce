@@ -2,7 +2,7 @@ import { fail, redirect } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
 import { Argon2id } from "oslo/password";
 import { lucia } from "$lib/database/lucia";
-import { getUserByName } from "$lib/database/router/users";
+import { getUserByEmail } from "$lib/database/router/users";
 
 // SuperForms imports
 import { setError, superValidate } from "sveltekit-superforms/server";
@@ -10,7 +10,7 @@ import { zod } from "sveltekit-superforms/adapters";
 import { z } from "zod";
 
 const loginSchema = z.object({
-  name: z.string().min(1, "Username is required"),
+  email: z.string().email("Invalid email address").min(1, "Email is required"),
   password: z.string().min(1, "Password is required"),
 });
 
@@ -29,18 +29,18 @@ export const actions: Actions = {
       return fail(400, { form });
     }
 
-    const { name, password } = form.data;
+    const { email, password } = form.data;
 
-    const user = await getUserByName(name);
+    const user = await getUserByEmail(email);
 
     if (!user || typeof user.password !== "string") {
-      return setError(form, "name", "Invalid username or password");
+      return setError(form, "email", "Invalid email or password");
     }
 
     const validPassword = await new Argon2id().verify(user.password, password);
 
     if (!validPassword) {
-      return setError(form, "password", "Invalid username or password");
+      return setError(form, "password", "Invalid email or password");
     }
 
     const session = await lucia.createSession(user.id, {});
@@ -51,7 +51,7 @@ export const actions: Actions = {
       ...sessionCookie.attributes,
     });
 
-    console.log(`Login successful for user: ${name}`);
+    console.log(`Login successful for user: ${email}`);
     console.log(`Session ID: ${session.id}`);
     console.log(`Session Cookie: ${sessionCookie.value}`);
     throw redirect(302, "/");

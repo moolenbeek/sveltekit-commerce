@@ -35,9 +35,15 @@
 		</Card.Header>
 		<form method="POST" use:enhance bind:this={formElement}>
 			<Card.Content>
-				<Input type="text" id="name" name="name" placeholder="Username" bind:value={$form.name} required />
-				{#if $errors.name}<p class="text-red-500 text-sm mt-1">{$errors.name}</p>{/if}
+				<div class="mt-4">
+					<Input type="text" id="firstName" name="firstName" placeholder="First Name" bind:value={$form.firstName} required />
+					{#if $errors.firstName}<p class="text-red-500 text-sm mt-1">{$errors.firstName}</p>{/if}
+				</div>
 				
+				<div class="mt-4">
+					<Input type="text" id="lastName" name="lastName" placeholder="Last Name" bind:value={$form.lastName} required />
+					{#if $errors.lastName}<p class="text-red-500 text-sm mt-1">{$errors.lastName}</p>{/if}
+				</div>
 				<div class="mt-4">
 					<Input type="email" id="email" name="email" placeholder="Email" bind:value={$form.email} required />
 					{#if $errors.email}<p class="text-red-500 text-sm mt-1">{$errors.email}</p>{/if}

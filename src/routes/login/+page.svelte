@@ -13,7 +13,7 @@
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.key === 'Tab' && !formElement.contains(document.activeElement)) {
 			event.preventDefault();
-			document.getElementById('name')?.focus();
+			document.getElementById('email')?.focus(); // Changed from 'name' to 'email'
 		}
 	}
 
@@ -36,8 +36,8 @@
 		</Card.Header>
 		<form method="POST" use:enhance bind:this={formElement}>
 			<Card.Content>
-				<Input type="text" id="name" name="name" placeholder="Username" bind:value={$form.name} required />
-				{#if $errors.name}<p class="text-red-500 text-sm mt-1">{$errors.name}</p>{/if}
+				<Input type="email" id="email" name="email" placeholder="Email" bind:value={$form.email} required />
+				{#if $errors.email}<p class="text-red-500 text-sm mt-1">{$errors.email}</p>{/if}
 				
 				<div class="mt-4">
 					<Input type="password" id="password" name="password" placeholder="Password" bind:value={$form.password} required />

@@ -24,7 +24,7 @@
       </CardHeader>
       <CardContent>
         <!-- change username and email -->
-        <h1>{data.user.name}</h1>
+        <h1>{data.user.firstName} {data.user.lastName}</h1>
       </CardContent>
       <CardFooter></CardFooter>
     </Card>

@@ -10,7 +10,8 @@ import { setError, superValidate } from "sveltekit-superforms/server";
 import { zod } from "sveltekit-superforms/adapters";
 
 const signUpSchema = userSchema.pick({
-  name: true,
+  firstName: true,
+  lastName:true,
   email: true,
   password: true,
 });
@@ -32,13 +33,13 @@ export const actions: Actions = {
       return fail(400, { form });
     }
 
-    let { name, email, password } = form.data;
+    let { firstName, lastName, email, password } = form.data;
 
     password = await new Argon2id().hash(password);
     const id = crypto.randomUUID();
     const token = crypto.randomUUID();
     try {
-      await createUser({ id, email, name, password, token });
+      await createUser({ id, email, firstName, lastName, password, token });
 
       // Create session for the new user
       const session = await lucia.createSession(id, {});

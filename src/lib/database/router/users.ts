@@ -15,18 +15,6 @@ export const getUserByEmail = async (email: string) => {
   }
 };
 
-export const getUserByName = async (name: string) => {
-  const user = await db
-    .select()
-    .from(userTable)
-    .where(eq(userTable.name, name));
-  if (user.length === 0) {
-    return null;
-  } else {
-    return user[0];
-  }
-};
-
 export const createUser = async (user: User) => {
   const result = await db
     .insert(userTable)

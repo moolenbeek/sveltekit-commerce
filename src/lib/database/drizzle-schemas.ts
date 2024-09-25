@@ -10,7 +10,8 @@ import {
 export const userTable = pgTable("users", {
   id: text("id").notNull().primaryKey(),
   email: text("email").notNull().unique(),
-  name: text("name").notNull(),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
   password: text("password"),
   token: text("token").unique(),
 });
