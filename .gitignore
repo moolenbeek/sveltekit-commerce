@@ -1,5 +1,8 @@
 node_modules
 
+# Todo
+todo.md
+
 # DB
 /src/lib/database/migrations
 
