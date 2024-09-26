@@ -11,7 +11,7 @@ import { zod } from "sveltekit-superforms/adapters";
 
 const signUpSchema = userSchema.pick({
   firstName: true,
-  lastName:true,
+  lastName: true,
   email: true,
   password: true,
 });
