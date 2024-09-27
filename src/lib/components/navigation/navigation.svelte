@@ -1,16 +1,13 @@
 <script lang="ts">
 	import { Button } from "$lib/components/ui/button";
-	import { Sun, Moon, ShoppingCart, Menu, User, LogOut } from "lucide-svelte";
-	import { Sheet, SheetContent, SheetTrigger } from "$lib/components/ui/sheet";
+	import { Sun, Moon, ShoppingCart, User, LogOut } from "lucide-svelte";
 	import { Avatar, AvatarFallback, AvatarImage } from "$lib/components/ui/avatar";
 	import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "$lib/components/ui/dropdown-menu";
-	import { writable } from 'svelte/store';
 	import { onMount } from "svelte";
 
 	export let user: any;
 
 	let isDarkMode: boolean;
-	let isMenuOpen = writable(false);
 
 	onMount(() => {
 		isDarkMode = document.documentElement.classList.contains("dark");
@@ -24,10 +21,6 @@
 	$: if (isDarkMode !== undefined) {
 		document.documentElement.classList.toggle("dark", isDarkMode);
 	}
-
-	function toggleMenu() {
-		isMenuOpen.update(value => !value);
-	}
 </script>
 
 <nav class="border-b bg-background">
@@ -35,13 +28,11 @@
 		<div class="flex h-16 items-center justify-between">
 			<a href="/" class="text-xl font-bold">website</a>
 			<div class="flex items-center space-x-4">
-				<div class="hidden sm:flex items-center space-x-4">
-					{#if !user}
-						<Button variant="secondary" size="sm" href="/login">
-							Login
-						</Button>
-					{/if}
-				</div>
+				{#if !user}
+					<Button variant="secondary" size="sm" href="/login">
+						Login
+					</Button>
+				{/if}
 				<Button variant="ghost" size="icon" on:click={toggleDarkMode}>
 					{#if isDarkMode}
 						<Sun class="h-[1.2rem] w-[1.2rem]" />
@@ -82,31 +73,6 @@
 						</DropdownMenuContent>
 					</DropdownMenu>
 				{/if}
-				<div class="sm:hidden">
-					<Sheet bind:open={$isMenuOpen}>
-						<SheetTrigger asChild>
-							<Button variant="ghost" size="icon" on:click={toggleMenu}>
-								<Menu class="h-[1.2rem] w-[1.2rem]" />
-							</Button>
-						</SheetTrigger>
-						<SheetContent>
-							<nav class="flex flex-col space-y-4">
-								{#if !user}
-									<Button href="/login">Login</Button>
-								{:else}
-									<a href="/">{user.firstName} {user.lastName}</a>
-									<form action="/logout" method="POST">
-										<Button type="submit" class="outline w-full">Logout</Button>
-									</form>
-									<Avatar>
-										<AvatarImage src={user.avatarUrl} alt={`${user.firstName} ${user.lastName}`} />
-										<AvatarFallback>{user.firstName[0]}{user.lastName[0]}</AvatarFallback>
-									</Avatar>
-								{/if}
-							</nav>
-						</SheetContent>
-					</Sheet>
-				</div>
 			</div>
 		</div>
 	</div>
