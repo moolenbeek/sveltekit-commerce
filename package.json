@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@lucia-auth/adapter-drizzle": "^1.1.0",
+    "@vercel/speed-insights": "^1.0.12",
     "bits-ui": "^0.21.15",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
