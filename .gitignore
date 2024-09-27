@@ -4,7 +4,7 @@ node_modules
 todo.md
 
 # DB
-/src/lib/database/migrations
+# /src/lib/database/migrations
 
 # Output
 .output
