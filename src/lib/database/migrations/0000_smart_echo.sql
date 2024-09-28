@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"email" text NOT NULL,
 	"first_name" text NOT NULL,
 	"last_name" text NOT NULL,
+	"role" text DEFAULT 'USER' NOT NULL,
 	"password" text,
 	"token" text,
 	CONSTRAINT "users_email_unique" UNIQUE("email"),

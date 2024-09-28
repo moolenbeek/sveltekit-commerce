@@ -12,6 +12,7 @@ export const userTable = pgTable("users", {
   email: text("email").notNull().unique(),
   firstName: text("first_name").notNull(),
   lastName: text("last_name").notNull(),
+	role: text('role').notNull().default('USER'),
   password: text("password"),
   token: text("token").unique(),
 });
@@ -27,7 +28,6 @@ export const sessionTable = pgTable("sessions", {
   }).notNull(),
 });
 
-// New tables
 export const productCategoryTable = pgTable("product_categories", {
   id: text("id").notNull().primaryKey(),
   name: text("name").notNull().unique(),
@@ -72,7 +72,6 @@ export const cartItemTable = pgTable("cart_items", {
 export type User = typeof userTable.$inferInsert;
 export type Session = typeof sessionTable.$inferInsert;
 
-// New types
 export type ProductCategory = typeof productCategoryTable.$inferInsert;
 export type Product = typeof productTable.$inferInsert;
 export type ProductInventory = typeof productInventoryTable.$inferInsert;
